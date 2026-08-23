@@ -3,6 +3,7 @@ import { PageLayout, SectionIntro } from '../components/Layout'
 import { Seo } from '../components/Seo'
 import type { Project } from '../data/projects'
 import { getSiteUrl } from '../data/site'
+import { sitePath } from '../lib/routes'
 
 export function ProjectDetail({ project }: { project: Project }) {
   const schema = {
@@ -16,8 +17,8 @@ export function ProjectDetail({ project }: { project: Project }) {
       <section className="page-section shell"><SectionIntro number="01" label="Scope of work" title="The brief, recorded with precision." /><div className="project-scope"><p>{project.description}</p><ul>{project.scope.map((item) => <li key={item}>{item}</li>)}</ul></div></section>
       {project.constructionStages.length > 0 && <section className="project-journey"><div className="shell"><SectionIntro number="02" label="Project journey" title="Progress in context." /><div className="journey-grid">{project.constructionStages.map((stage, index) => <article key={stage.title}>{stage.image && <img src={stage.image} alt={`${project.name} — ${stage.title}`} loading="lazy" />}<span>0{index + 1}</span><h3>{stage.title}</h3><p>{stage.description}</p></article>)}</div></div></section>}
       {project.gallery.length > 0 && <section className="project-gallery shell"><SectionIntro number="03" label="Project gallery" title="Details of the completed work." /><div>{project.gallery.map((image, index) => <img src={image} key={image} alt={`${project.name} project detail ${index + 1}`} loading="lazy" />)}</div></section>}
-      <section className="project-related shell"><p className="eyebrow">Related services</p><div>{project.services.map((service) => <a href="/services" key={service}>{service}<span>↗</span></a>)}</div></section>
+      <section className="project-related shell"><p className="eyebrow">Related services</p><div>{project.services.map((service) => <a href={sitePath('/services')} key={service}>{service}<span>↗</span></a>)}</div></section>
     </article>
-    <section className="closing-cta"><div className="shell closing-cta__inner"><p className="eyebrow eyebrow--light">A similar project?</p><h2>Start with your brief.</h2><p>Tell us about the location, stage and outcome you are considering.</p><Button href="/contact" variant="light">Start your project</Button></div></section>
+    <section className="closing-cta"><div className="shell closing-cta__inner"><p className="eyebrow eyebrow--light">A similar project?</p><h2>Start with your brief.</h2><p>Tell us about the location, stage and outcome you are considering.</p><Button href={sitePath('/contact')} variant="light">Start your project</Button></div></section>
   </PageLayout>
 }

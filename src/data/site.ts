@@ -13,7 +13,7 @@ export const site = {
 // Falling back to the live origin keeps canonical URLs correct in previews and on a deployed host.
 export function getSiteUrl(path = '/') {
   const base = import.meta.env.VITE_SITE_URL || window.location.origin
-  return new URL(path, base).toString()
+  return new URL(sitePath(path), base).toString()
 }
 
 export type Service = {
@@ -74,3 +74,4 @@ export const projectStages = [
   'Ready to build',
   'Existing building',
 ]
+import { sitePath } from '../lib/routes'
